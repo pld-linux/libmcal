@@ -12,6 +12,7 @@ Source1:	http://dl.sourceforge.net/libmcal/mcaldrivers-%{drvver}.tar.gz
 # Source1-md5: c8c96f6cd574139b88a13f6084164cfa
 Patch0:		%{name}-make.patch
 Patch1:		%{name}-define.patch
+Patch2:		%{name}-dirs.patch
 URL:		http://mcal.chek.com/
 BuildRequires:	flex
 BuildRequires:	libtool
@@ -57,6 +58,7 @@ Statyczna wersja biblioteki MCAL.
 mv -f mcal-drivers/* .
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 chmod +x configure
@@ -79,11 +81,6 @@ install -d $RPM_BUILD_ROOT%{_libdir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-if [ "%{_prefix}/lib" != "%{_libdir}" ] ; then
-	mv $RPM_BUILD_ROOT%{_prefix}/lib/* \
-		$RPM_BUILD_ROOT%{_libdir}
-fi
 
 mv -f mstore/Changelog Changelog.mstore
 mv -f mstore/README README.mstore
