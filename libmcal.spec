@@ -5,8 +5,8 @@ Version:	0.6
 Release:	1
 License:	GPL
 Group:		Libraries
-Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/libmcal/%{name}-%{version}.tar.gz
-Source1:	ftp://ftp.sourceforge.net/pub/sourceforge/libmcal/mcaldrivers-0.8.tar.gz
+Source0:	http://dl.sourceforge.net/libmcal/%{name}-%{version}.tar.gz
+Source1:	http://dl.sourceforge.net/libmcal/mcaldrivers-0.8.tar.gz
 Patch0:		%{name}-echo.patch
 Patch1:		%{name}-make.patch
 URL:		http://mcal.chek.com/
