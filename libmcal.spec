@@ -7,7 +7,9 @@ Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libmcal/%{name}-%{version}.tar.gz
+# Source0-md5: 8d8f16e59a7e859c1407df3d72052825
 Source1:	http://dl.sourceforge.net/libmcal/mcaldrivers-%{drvver}.tar.gz
+# Source1-md5: c8c96f6cd574139b88a13f6084164cfa
 Patch0:		%{name}-make.patch
 URL:		http://mcal.chek.com/
 BuildRequires:	flex
