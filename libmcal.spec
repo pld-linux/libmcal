@@ -3,7 +3,7 @@ Summary(pl):	Modularna biblioteka dostêpu do kalendarzy
 Name:		libmcal
 Version:	0.7
 %define	drvver	0.9
-Release:	1
+Release:	2
 License:	GPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libmcal/%{name}-%{version}.tar.gz
