@@ -1,0 +1,132 @@
+--- libmcal/Makefile.in.orig	Tue Jan 25 04:08:10 2000
++++ libmcal/Makefile.in	Fri May  3 21:42:24 2002
+@@ -8,32 +8,34 @@
+ 
+ INCLUDE=@DRIVER_INCDIR@  ${OTHERINCDIR} -I.
+ 
+-CFLAGS=-O0 -Wall -g ${INCLUDE}
++CFLAGS=$(OPTFLAGS) -Wall ${INCLUDE}
+ 
+-LIBOBJS=mcal.o datetime.o lex.ical_yy.o icalroutines.o cal_misc.o $(DRIVER_LIBS)
++LIBOBJS=mcal.lo datetime.lo lex.ical_yy.lo icalroutines.lo cal_misc.lo $(DRIVER_LIBS)
+ ALLOBJS=${LIBOBJS} tester.o
+ OTHERLIBS=${OTHERLIBS}
+ OTHERLIBDIR=${OTHERLIBDIR}
+ 
+-LIBCAL=libmcal.a
++libdir=@libdir@
++includedir=@includedir@
+ 
+-all: libmcal.a
++LIBCAL=libmcal.la
+ 
+-install: libmcal.a
+-	mkdir /usr/local/mcal
+-	mkdir /usr/local/mcal/lib
+-	mkdir /usr/local/mcal/include
+-	cp libmcal.a /usr/local/mcal/lib
+-	cp mcal.h bool.h datetime.h drivers.h /usr/local/mcal/include
+-libmcal.a: $(LIBOBJS)
++all: libmcal.la
++
++install: libmcal.la
++	install -d $(DESTDIR)$(libdir) $(DESTDIR)$(includedir)
++	libtool install libmcal.la $(DESTDIR)$(libdir)
++	install -m644 mcal.h bool.h datetime.h drivers.h cal_misc.h icalroutines.h $(DESTDIR)$(includedir)
++
++libmcal.la: $(LIBOBJS)
+ 	rm -f $(LIBCAL)
+-	ar r $(LIBCAL) $(LIBOBJS)
++	libtool $(CC) -o $(LIBCAL) $(LIBOBJS) -rpath $(libdir)
+ 
+ lex.ical_yy.c: icalscanner.lex
+ 	$(FLEX) $<
+ 
+ tester: tester.o libmcal.a
+-	gcc -Wall -g -o tester tester.o $(LIBCAL) -lcrypt
++	$(CC) $(CFLAGS) -Wall -o tester tester.o $(LIBCAL) -lcrypt
+ 
+ clean:
+ 	rm -f *.o $(LIBCAL) tester  
+@@ -45,5 +47,7 @@
+ dep: depend
+ 
+ depend:
+-	makedepend $(INCLUDE) -- $(ALLOBJS:%.o=%.c) >& /dev/null
++	makedepend $(INCLUDE) -- $(ALLOBJS:%.lo=%.c) >& /dev/null
+ 
++%.lo: %.c
++	libtool $(CC) $(CFLAGS) -c $< -o $@
+--- libmcal/configure.orig	Fri May  3 21:52:24 2002
++++ libmcal/configure	Fri May  3 22:08:51 2002
+@@ -368,7 +368,7 @@
+ 	else
+ 	echo "checking for driver $ac_package... yes"
+ 	cat $ac_optarg/bootstrap.in >> bootstrap.in
+-	echo "DRIVER_LIBS+=$ac_optarg/${ac_package}_driver.o" >> bootstrap.in
++	echo "DRIVER_LIBS+=$ac_optarg/lib${ac_package}_driver.la" >> bootstrap.in
+ 	echo  "#include \"$ac_optarg/${ac_package}.h\"" >> drivers.h
+ 	echo  "&${ac_package}_driver," >> drivers.c
+ 	DRIVER_INCDIR="-I$ac_optarg $DRIVER_INCDIR"
+--- libmcal/icap/Makefile.orig	Tue Jan 25 04:08:10 2000
++++ libmcal/icap/Makefile	Fri May  3 22:12:45 2002
+@@ -3,15 +3,15 @@
+ CC=gcc
+ FLEX=flex
+ INCLUDE=-I..
+-CFLAGS=-O0 -Wall -g $(INCLUDE)
+-ALLOBJS=icap.o icaproutines.o lex.icap_yy.o
+-TARGET=icap_driver.o
++CFLAGS=$(OPTFLAGS) -Wall $(INCLUDE)
++ALLOBJS=icap.lo icaproutines.lo lex.icap_yy.lo
++TARGET=libicap_driver.la
+ 
+ all: $(TARGET)
+ 
+ 
+ $(TARGET): $(ALLOBJS)
+-	ld -r -o $(TARGET) $(ALLOBJS)
++	libtool $(CC) -o $(TARGET) $(ALLOBJS)
+ 	touch bootstrap.in
+ 
+ lex.icap_yy.c: icapscanner.lex
+@@ -23,5 +23,7 @@
+ dep: depend
+ 
+ depend:
+-	makedepend $(INCLUDE) -- $(ALLOBJS:%.o=%.c) >& /dev/null
++	makedepend $(INCLUDE) -- $(ALLOBJS:%.lo=%.c) >& /dev/null
+ 
++%.lo : %.c
++	libtool $(CC) $(CFLAGS) -c $< -o $@
+--- libmcal/mstore/Makefile.orig	Thu Dec  2 09:02:57 1999
++++ libmcal/mstore/Makefile	Fri May  3 22:12:30 2002
+@@ -3,15 +3,15 @@
+ CC=gcc
+ FLEX=flex
+ INCLUDE=-I..
+-CFLAGS=-O0 -Wall -g $(INCLUDE)
+-ALLOBJS=mstore.o
+-TARGET=mstore_driver.o
++CFLAGS=$(OPTFLAGS) -Wall $(INCLUDE)
++ALLOBJS=mstore.lo
++TARGET=libmstore_driver.la
+ 
+ all: $(TARGET)
+ 
+ 
+ $(TARGET): $(ALLOBJS)
+-	ld -r -o $(TARGET) $(ALLOBJS)
++	libtool $(CC) -o $(TARGET) $(ALLOBJS)
+ 	touch bootstrap.in
+ 
+ clean:
+@@ -20,4 +20,7 @@
+ dep: depend
+ 
+ depend:
+-	makedepend $(INCLUDE) -- $(ALLOBJS:%.o=%.c) >& /dev/null
++	makedepend $(INCLUDE) -- $(ALLOBJS:%.lo=%.c) >& /dev/null
++
++%.lo: %.c
++	libtool $(CC) $(CFLAGS) -c $< -o $@
