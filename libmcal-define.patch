@@ -1,0 +1,10 @@
+--- libmcal/icalscanner.lex.orig	2003-07-19 16:59:41.000000000 +0200
++++ libmcal/icalscanner.lex	2003-07-19 17:00:49.000000000 +0200
+@@ -32,6 +32,7 @@
+  */
+ 
+ #include "icalroutines.h"
++#define INITIAL 0
+ 
+ void
+ ical_usebuf(const char *buf, size_t size)
