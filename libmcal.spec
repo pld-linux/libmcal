@@ -11,6 +11,7 @@ Source0:	http://dl.sourceforge.net/libmcal/%{name}-%{version}.tar.gz
 Source1:	http://dl.sourceforge.net/libmcal/mcaldrivers-%{drvver}.tar.gz
 # Source1-md5: c8c96f6cd574139b88a13f6084164cfa
 Patch0:		%{name}-make.patch
+Patch1:		%{name}-define.patch
 URL:		http://mcal.chek.com/
 BuildRequires:	flex
 BuildRequires:	libtool
@@ -55,6 +56,7 @@ Statyczna wersja biblioteki MCAL.
 %setup -q -n %{name} -a1
 mv -f mcal-drivers/* .
 %patch0 -p1
+%patch1 -p1
 
 %build
 chmod +x configure
