@@ -1,0 +1,33 @@
+diff -durN -x '*~' libmcal.orig/Makefile.in libmcal/Makefile.in
+--- libmcal.orig/Makefile.in	2004-12-22 10:26:13.000000000 +0100
++++ libmcal/Makefile.in	2004-12-22 10:31:45.403508704 +0100
+@@ -19,22 +19,21 @@
+ all: libmcal.la
+ 
+ install: libmcal.la
+-	mkdir -p ${DESTDIR}@prefix@/lib/
+-	mkdir -p ${DESTDIR}@prefix@/include/mcal/
+-	libtool --mode=install install libmcal.la ${DESTDIR}@prefix@/lib
++	mkdir -p ${DESTDIR}@libdir@
++	mkdir -p ${DESTDIR}@includedir@/mcal/
++	libtool --mode=install install libmcal.la ${DESTDIR}@libdir@
+ 	install -m 644 \
+ 	  mcal.h bool.h datetime.h drivers.h cal_misc.h icalroutines.h \
+-	  ${DESTDIR}@prefix@/include/mcal/
++	  ${DESTDIR}@includedir@/mcal/
+ 	touch installed
+ 
+ install-strip: installed
+-	strip ${DESTDIR}@prefix@/lib/libmcal.so
+-	strip ${DESTDIR}@prefix@/lib/libmcal.a
++	strip ${DESTDIR}@libdir@/libmcal.so
++	strip ${DESTDIR}@libdir@/libmcal.a
+ 
+ libmcal.la: $(LIBOBJS)
+ 	rm -f $(LIBCAL)
+-	libtool --mode=link $(CC) $(LDFLAGS) -o libmcal.la $(LIBOBJS) -rpath @prefix@/lib -lpam
+-
++	libtool --mode=link $(CC) $(LDFLAGS) -o libmcal.la $(LIBOBJS) -rpath @libdir@ -lpam
+ 
+ lex.ical_yy.c: icalscanner.lex
+ 	$(FLEX) $<
