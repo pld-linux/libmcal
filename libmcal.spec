@@ -19,8 +19,6 @@ BuildRequires:	libtool
 BuildRequires:	pam-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_includedir	%{_prefix}/include/mcal
-
 %description
 libmcal is a C library for accessing calendars. It's written to be
 very modular, with plugable drivers.
@@ -100,7 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
-%{_includedir}
+%{_includedir}/mcal
 
 %files static
 %defattr(644,root,root,755)
