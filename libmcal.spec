@@ -79,8 +79,6 @@ install -d $RPM_BUILD_ROOT
 mv -f mstore/Changelog Changelog.mstore
 mv -f mstore/README README.mstore
 
-gzip -9nf CHANGELOG FAQ-MCAL FEATURE-IMPLEMENTATION HOW-TO-MCAL *.mstore
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -89,7 +87,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc CHANGELOG FAQ-MCAL FEATURE-IMPLEMENTATION HOW-TO-MCAL *.mstore
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
