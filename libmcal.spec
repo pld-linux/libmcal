@@ -75,10 +75,15 @@ chmod +x configure
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_libdir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+if [ "%{_prefix}/lib" != "%{_libdir}" ] ; then
+	mv $RPM_BUILD_ROOT%{_prefix}/lib/* \
+		$RPM_BUILD_ROOT%{_libdir}
+fi
 
 mv -f mstore/Changelog Changelog.mstore
 mv -f mstore/README README.mstore
