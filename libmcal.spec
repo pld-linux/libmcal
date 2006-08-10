@@ -3,7 +3,7 @@ Summary(pl):	Modularna biblioteka dostêpu do kalendarzy
 Name:		libmcal
 Version:	0.7
 %define	drvver	0.9
-Release:	2
+Release:	3
 License:	GPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libmcal/%{name}-%{version}.tar.gz
@@ -13,6 +13,7 @@ Source1:	http://dl.sourceforge.net/libmcal/mcaldrivers-%{drvver}.tar.gz
 Patch0:		%{name}-make.patch
 Patch1:		%{name}-define.patch
 Patch2:		%{name}-dirs.patch
+Patch3:		%{name}-gcc4.patch
 URL:		http://mcal.chek.com/
 BuildRequires:	flex
 BuildRequires:	libtool
@@ -57,6 +58,7 @@ mv -f mcal-drivers/* .
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 chmod +x configure
