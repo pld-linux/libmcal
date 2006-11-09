@@ -1,8 +1,8 @@
+%define	drvver	0.9
 Summary:	Modular Calendar Access Library
 Summary(pl):	Modularna biblioteka dostêpu do kalendarzy
 Name:		libmcal
 Version:	0.7
-%define	drvver	0.9
 Release:	3
 License:	GPL
 Group:		Libraries
@@ -32,7 +32,7 @@ napisana, by byæ modularna, z mo¿liwo¶ci± do³±czania sterowników.
 Summary:	MCAL header files
 Summary(pl):	Pliki nag³ówkowe biblioteki MCAL
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files for MCAL-based programs development.
@@ -44,7 +44,7 @@ Pliki nag³ówkowe do tworzenia programów korzystaj±cych z MCAL.
 Summary:	MCAL static library
 Summary(pl):	Statyczna biblioteka MCAL
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of MCAL.
