@@ -1,6 +1,6 @@
 %define	drvver	0.9
 Summary:	Modular Calendar Access Library
-Summary(pl):	Modularna biblioteka dostêpu do kalendarzy
+Summary(pl.UTF-8):   Modularna biblioteka dostÄ™pu do kalendarzy
 Name:		libmcal
 Version:	0.7
 Release:	3
@@ -24,32 +24,32 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 libmcal is a C library for accessing calendars. It's written to be
 very modular, with plugable drivers.
 
-%description -l pl
-libmcal to biblioteka w C s³u¿±ca do dostêpu do kalendarzy. Jest tak
-napisana, by byæ modularna, z mo¿liwo¶ci± do³±czania sterowników.
+%description -l pl.UTF-8
+libmcal to biblioteka w C sÅ‚uÅ¼Ä…ca do dostÄ™pu do kalendarzy. Jest tak
+napisana, by byÄ‡ modularna, z moÅ¼liwoÅ›ciÄ… doÅ‚Ä…czania sterownikÃ³w.
 
 %package devel
 Summary:	MCAL header files
-Summary(pl):	Pliki nag³ówkowe biblioteki MCAL
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe biblioteki MCAL
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files for MCAL-based programs development.
 
-%description devel -l pl
-Pliki nag³ówkowe do tworzenia programów korzystaj±cych z MCAL.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe do tworzenia programÃ³w korzystajÄ…cych z MCAL.
 
 %package static
 Summary:	MCAL static library
-Summary(pl):	Statyczna biblioteka MCAL
+Summary(pl.UTF-8):   Statyczna biblioteka MCAL
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of MCAL.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna wersja biblioteki MCAL.
 
 %prep
