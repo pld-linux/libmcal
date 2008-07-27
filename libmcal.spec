@@ -3,7 +3,7 @@ Summary:	Modular Calendar Access Library
 Summary(pl.UTF-8):	Modularna biblioteka dostępu do kalendarzy
 Name:		libmcal
 Version:	0.7
-Release:	3
+Release:	4
 License:	GPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libmcal/%{name}-%{version}.tar.gz
