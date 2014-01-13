@@ -3,22 +3,25 @@ Summary:	Modular Calendar Access Library
 Summary(pl.UTF-8):	Modularna biblioteka dostępu do kalendarzy
 Name:		libmcal
 Version:	0.7
-Release:	4
+Release:	5
 License:	GPL
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/libmcal/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/libmcal/%{name}-%{version}.tar.gz
 # Source0-md5:	8d8f16e59a7e859c1407df3d72052825
-Source1:	http://dl.sourceforge.net/libmcal/mcaldrivers-%{drvver}.tar.gz
+Source1:	http://downloads.sourceforge.net/libmcal/mcaldrivers-%{drvver}.tar.gz
 # Source1-md5:	c8c96f6cd574139b88a13f6084164cfa
 Patch0:		%{name}-make.patch
 Patch1:		%{name}-define.patch
 Patch2:		%{name}-dirs.patch
 Patch3:		%{name}-gcc4.patch
+Patch4:		ical_yyleng.patch
 URL:		http://mcal.chek.com/
 BuildRequires:	flex
 BuildRequires:	libtool
 BuildRequires:	pam-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		skip_post_check_so	libmcal.so.0.0.0
 
 %description
 libmcal is a C library for accessing calendars. It's written to be
@@ -59,6 +62,7 @@ mv -f mcal-drivers/* .
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 chmod +x configure
@@ -95,6 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CHANGELOG FAQ-MCAL FEATURE-IMPLEMENTATION HOW-TO-MCAL *.mstore
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %ghost %{_libdir}/lib*.so.0
 
 %files devel
 %defattr(644,root,root,755)
