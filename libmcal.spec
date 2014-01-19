@@ -21,6 +21,7 @@ BuildRequires:	libtool
 BuildRequires:	pam-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+# cc_vdlog(), cc_vlog(), cc_searched(), cc_login() callbacks to be defined by user
 %define		skip_post_check_so	libmcal.so.0.0.0
 
 %description
@@ -98,15 +99,15 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CHANGELOG FAQ-MCAL FEATURE-IMPLEMENTATION HOW-TO-MCAL *.mstore
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
-%attr(755,root,root) %ghost %{_libdir}/lib*.so.0
+%attr(755,root,root) %{_libdir}/libmcal.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libmcal.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/libmcal.so
+%{_libdir}/libmcal.la
 %{_includedir}/mcal
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libmcal.a
