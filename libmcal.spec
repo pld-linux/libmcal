@@ -3,8 +3,8 @@ Summary:	Modular Calendar Access Library
 Summary(pl.UTF-8):	Modularna biblioteka dostępu do kalendarzy
 Name:		libmcal
 Version:	0.7
-Release:	6
-License:	GPL
+Release:	7
+License:	LGPL v2+
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/libmcal/%{name}-%{version}.tar.gz
 # Source0-md5:	8d8f16e59a7e859c1407df3d72052825
@@ -14,7 +14,7 @@ Patch0:		%{name}-make.patch
 Patch1:		%{name}-define.patch
 Patch2:		%{name}-dirs.patch
 Patch3:		%{name}-gcc4.patch
-Patch4:		ical_yyleng.patch
+Patch4:		%{name}-types.patch
 URL:		http://mcal.chek.com/
 BuildRequires:	flex
 BuildRequires:	libtool
@@ -58,7 +58,7 @@ Statyczna wersja biblioteki MCAL.
 
 %prep
 %setup -q -n %{name} -a1
-mv -f mcal-drivers/* .
+%{__mv} mcal-drivers/* .
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -67,10 +67,14 @@ mv -f mcal-drivers/* .
 
 %build
 chmod +x configure
+
 %{__make} -C icap \
-	CC="%{__cc}" OPTFLAGS="%{rpmcflags}"
+	CC="%{__cc}" \
+	OPTFLAGS="%{rpmcflags}"
+
 %{__make} -C mstore \
-	CC="%{__cc}" OPTFLAGS="%{rpmcflags}"
+	CC="%{__cc}" \
+	OPTFLAGS="%{rpmcflags}"
 
 %configure2_13 \
 	--with-icap \
@@ -87,8 +91,8 @@ install -d $RPM_BUILD_ROOT%{_libdir}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-mv -f mstore/Changelog Changelog.mstore
-mv -f mstore/README README.mstore
+%{__mv} mstore/Changelog Changelog.mstore
+%{__mv} mstore/README README.mstore
 
 %clean
 rm -rf $RPM_BUILD_ROOT

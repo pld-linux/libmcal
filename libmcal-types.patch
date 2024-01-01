@@ -1,0 +1,36 @@
+--- libmcal/icap/icaproutines.c.orig	2003-01-28 18:31:33.000000000 +0100
++++ libmcal/icap/icaproutines.c	2024-01-01 13:47:07.055548083 +0100
+@@ -164,7 +164,7 @@ icap_literal(ICAPNET *net, const char *a
+ 	icapresp_t	resp;
+ 	char		tag[ICAPMAXTAG];
+ 
+-	fprintf(net->out, " {%u}\r\n", strlen(arg));
++	fprintf(net->out, " {%zu}\r\n", strlen(arg));
+ 
+ 	do {
+ 		resp = icap_getresp(net, tag, ICAPMAXTAG);
+--- libmcal/mstore/mstore.c.orig	2024-01-01 11:27:29.577599386 +0100
++++ libmcal/mstore/mstore.c	2024-01-01 13:51:05.197591291 +0100
+@@ -412,11 +412,11 @@ CALEVENT *read_event(FILE *calfile)
+ {
+ 	char		line[100];
+ 	char		*buf;
+-	int		size;
++	size_t		size;
+ 	CALEVENT	*event;
+ 
+ 	fgets(line, sizeof(line), calfile);
+-	if (sscanf(line, "%d", &size) != 1)
++	if (sscanf(line, "%zd", &size) != 1)
+ 		return NULL;
+ 	buf = malloc(size + 2);
+ 	fread(buf, size, 1, calfile);
+@@ -454,7 +454,7 @@ write_event(FILE *calfile, const CALEVEN
+ 	if (buf == NULL)
+ 		return false;
+ 
+-	fprintf(calfile, "%u\r\n", strlen(buf));
++	fprintf(calfile, "%zu\r\n", strlen(buf));
+ 	fputs(buf, calfile);
+ 	free(buf);
+ 
