@@ -15,7 +15,7 @@ Patch1:		%{name}-define.patch
 Patch2:		%{name}-dirs.patch
 Patch3:		%{name}-gcc4.patch
 Patch4:		%{name}-types.patch
-URL:		http://mcal.chek.com/
+URL:		http://libmcal.sourceforge.net/
 BuildRequires:	flex
 BuildRequires:	libtool
 BuildRequires:	pam-devel
