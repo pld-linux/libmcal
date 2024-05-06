@@ -3,19 +3,19 @@ Summary:	Modular Calendar Access Library
 Summary(pl.UTF-8):	Modularna biblioteka dostępu do kalendarzy
 Name:		libmcal
 Version:	0.7
-Release:	7
+Release:	8
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://downloads.sourceforge.net/libmcal/%{name}-%{version}.tar.gz
+Source0:	https://downloads.sourceforge.net/libmcal/%{name}-%{version}.tar.gz
 # Source0-md5:	8d8f16e59a7e859c1407df3d72052825
-Source1:	http://downloads.sourceforge.net/libmcal/mcaldrivers-%{drvver}.tar.gz
+Source1:	https://downloads.sourceforge.net/libmcal/mcaldrivers-%{drvver}.tar.gz
 # Source1-md5:	c8c96f6cd574139b88a13f6084164cfa
 Patch0:		%{name}-make.patch
 Patch1:		%{name}-define.patch
 Patch2:		%{name}-dirs.patch
 Patch3:		%{name}-gcc4.patch
 Patch4:		%{name}-types.patch
-URL:		http://libmcal.sourceforge.net/
+URL:		https://libmcal.sourceforge.net/
 BuildRequires:	flex
 BuildRequires:	libtool
 BuildRequires:	pam-devel
